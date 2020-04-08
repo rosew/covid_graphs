@@ -1,0 +1,52 @@
+<h1 class="dt w-100 ph0 mh0 f2 f1-l black-70">
+  <div class="dtc w-50 tl fw2"><%= @location %></div>
+</h1>
+
+<table class="f6 w-100" cellspacing="0">
+  <thead>
+    <tr class="stripe-dark">
+      <th class="fw6 tl pa3 bg-white">date</th>
+      <th class="fw6 tl pa3 bg-white">positive</th>
+			<th class="fw6 tl pa3 bg-white">% positive</th>
+      <th class="fw6 tl pa3 bg-white">negative</th>
+      <th class="fw6 tl pa3 bg-white">pending</th>
+      <th class="fw6 tl pa3 bg-white">tests run</th>
+
+      <th class="fw6 tl pa3 bg-white">recovered</th>
+			<th class="fw6 tl pa3 bg-white">death</th>
+ 			<th class="fw6 tl pa3 bg-white">hospitalized</th>
+			<th class="fw6 tl pa3 bg-white">currently</br>hospitalized</th>
+
+      <th class="fw6 tl pa3 bg-white">inIcuCurrently</th>
+      <th class="fw6 tl pa3 bg-white">inIcuCumulative</th>
+      <th class="fw6 tl pa3 bg-white">onVentilatorCurrently</th>
+      <th class="fw6 tl pa3 bg-white">onVentilatorCumulative</th>
+    </tr>
+  </thead>
+
+  <tbody id="list_items" class="lh-copy">
+		<% @rows.each do |row| %>
+		<tr id="row_<%= row.id %>" class="stripe-dark">
+      <td class="pa3"><%= row.date %></td>
+      <td class="pa3"><%= number_with_delimiter row.positive %></br>+<%= number_with_delimiter row.positiveIncrease %></td>
+			<td class="pa3"><%= number_to_percentage(100.0 * row.positive / row.totalTestResults, precision: 1) if row.totalTestResults && row.positive %></br>
+											<%= number_to_percentage(100.0 *  row.positiveIncrease / row.totalTestResultsIncrease, precision: 1) if row.totalTestResultsIncrease && row.positiveIncrease %></td>
+      <td class="pa3"><%= number_with_delimiter row.negative %></br>+<%= number_with_delimiter row.negativeIncrease %></td>
+      <td class="pa3"><%= number_with_delimiter row.pending %></td>
+      <td class="pa3"><%= number_with_delimiter row.totalTestResults %></br>+<%= number_with_delimiter row.totalTestResultsIncrease %></td>
+
+      <td class="pa3"><%= number_with_delimiter row.recovered %></td>
+      <td class="pa3"><%= number_with_delimiter row.death %></br>+<%= number_with_delimiter row.deathIncrease %></td>
+      <td class="pa3"><%= number_with_delimiter row.hospitalized %></br>+<%= number_with_delimiter row.hospitalizedIncrease %></td>
+      <td class="pa3"><%= number_with_delimiter row.hospitalizedCurrently %></td>
+			
+      <td class="pa3"><%= number_with_delimiter row.inIcuCurrently %></td>
+      <td class="pa3"><%= number_with_delimiter row.inIcuCumulative %></td>
+      <td class="pa3"><%= number_with_delimiter row.onVentilatorCurrently %></td>
+      <td class="pa3"><%= number_with_delimiter row.onVentilatorCumulative %></td>
+		</tr>
+		<% end %>
+  </tbody>
+</table>
+
+

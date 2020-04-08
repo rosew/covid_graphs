@@ -22,13 +22,7 @@
           </a>
         </div>
         <nav class="db dtc-ns v-mid w-100 tl tr-ns mt2 mt0-ns">
-          <% if user_signed_in? %>
-            <%= link_to "PROFILE", edit_user_registration_path, class: "f5 fw3 link dim black-50 mr2 mr3-m mr4-l dib" %>
-            <%= link_to "SIGN OUT", destroy_user_session_path, method: :delete, class: "f5 fw3 link dim black-50 mr2 mr3-m mr4-l dib" %>
-          <% else %>
-            <%= link_to "SIGN UP", new_user_registration_path, class: "f5 fw3 link dim black-50 mr2 mr3-m mr4-l dib" %>      
-            <%= link_to "SIGN IN", new_user_session_path, class: "f5 fw3 link dim black-50 mr2 mr3-m mr4-l dib" %>
-          <% end %>
+					<%= link_to "US", graph_path("us"), class: "f5 fw3 link dim black-50 mr2 mr3-m mr4-l dib" %>
         </nav>
       </div>
     </header>
@@ -48,17 +42,19 @@
     </main>
 
     <footer class="fl w-100 mt4 pv4 ph3 ph5-m ph6-l mid-gray bt b--black-10">
-      <small class="f6 db tc">© 2019 <b class="ttu">
-        <a class="dtc mid-gray link dim" href="" title="Home">Park Side Software, LLC</a></b>., All Rights Reserved</small>
       <small class="f6 mt1 db tc">
+       Data from the <b class="ttu">
+                <a class="dtc mid-gray link dim" href="https://covidtracking.com/" title="Home">CovidTracking API</a></b>.
+      </small>
+			<small class="f6 mt1 db tc">
         Contact <b class="">
         <a class="dtc mid-gray link dim" href="https://twitter.com/rose_w" title="Home">@rose_w</a></b> for questions.
         Design based on <b class="ttu">
                 <a class="dtc mid-gray link dim" href="https://tachyons.io/" title="Home">Tachyons.io</a></b>.
       </small>
       <div class="tc mt3">
-        <%= link_to "Terms of Use", page_path('terms'), title: "Terms", class: "f6 dib ph2 link mid-gray dim" %>
-        <%= link_to "Privacy", page_path('privacy'), title: "Privacy", class: "f6 dib ph2 link mid-gray dim" %>
+        <%#= link_to "Terms of Use", page_path('terms'), title: "Terms", class: "f6 dib ph2 link mid-gray dim" %>
+        <%#= link_to "Privacy", page_path('privacy'), title: "Privacy", class: "f6 dib ph2 link mid-gray dim" %>
       </div>
     </footer>
 
