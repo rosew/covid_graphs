@@ -1,0 +1,8 @@
+// This works because the pack is included on the html page where this ajax is used
+hideModal('<%= singular_table_name %>_<%%= @<%= singular_table_name %>.id %>_modal');
+
+// This is a var and not a const because otherwise there are problems when it is called twice
+var row = document.getElementById("<%= singular_table_name %>_<%%= @<%= singular_table_name %>.id %>");
+row.innerHTML = "<%%= escape_javascript(render partial: "item_content", object: @<%= singular_table_name %>) %>";
+
+<%%= render partial: "layouts/update_flash", locals: { flash_name: "notice", message: "<%= singular_table_name.titleize %> was updated." } %>

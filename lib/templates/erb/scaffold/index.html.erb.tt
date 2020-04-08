@@ -1,0 +1,31 @@
+<h1 class="dt w-100 ph0 mh0 f2 f1-l black-70">
+  <div class="dtc w-50 tl fw2"><%= plural_table_name.titleize %></div>
+  <div class="dtc w-50 tr">
+    <%%= link_to '+', new_<%= singular_route_name %>_path, class: "black-70 link dim" %>
+  <div>
+</h1>
+
+<% first_attribute = attributes.reject(&:password_digest?).first %>
+<% second_attribute = attributes.reject(&:password_digest?).second %>
+<table class="f6 w-100" cellspacing="0">
+  <thead>
+    <tr class="stripe-dark">
+      <th class="fw6 tl pa3 bg-white"><%= first_attribute.human_name %></th>
+      <th class="fw6 tl pa3 bg-white"><%= second_attribute.human_name %></th>
+      <th class="fw6 tl pa3 bg-white"></th>
+    </tr>
+  </thead>
+
+  <tbody class="lh-copy">
+    <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
+      <tr class="stripe-dark">
+        <td class="pa3"><%%= link_to <%= singular_table_name %>.<%= first_attribute.column_name %>, <%= model_resource_name %>, class: "b black-70 link dim" %></td>
+        <td class="pa3"><%%= <%= singular_table_name %>.<%= second_attribute.column_name %> %></td>
+        <td class="pa3 tr">
+          <%%= link_to 'Edit', edit_<%= singular_route_name %>_path(<%= singular_table_name %>), class: "b black-70 link dim mr2" %>
+          <%%= link_to 'Destroy', <%= model_resource_name %>, method: :delete, data: { confirm: 'Are you sure?' }, class: "b black-70 link dim" %>
+        </td>
+      </tr>
+    <%% end %>
+  </tbody>
+</table>

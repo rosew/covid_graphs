@@ -1,0 +1,30 @@
+<%%= javascript_pack_tag 'modal' %>
+<%%= render partial: "application/modal", locals: {modal_id: "new_<%= singular_table_name %>_modal", title: "New <%= singular_table_name.titleize %>", data: render('form', <%= singular_table_name %>: @<%= singular_table_name %>) } %>
+<div id="<%= singular_table_name %>_modals">
+  <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
+    <%%= render partial: "application/modal", locals: {modal_id: "<%= singular_table_name %>_#{<%= singular_table_name %>.id}_modal", title: "Edit <%= singular_table_name.titleize %>", data: render('form', <%= singular_table_name %>: <%= singular_table_name %>) } %>
+  <%% end %>
+</div>
+
+<h1 class="dt w-100 ph0 mh0 f2 f1-l black-70">
+  <div class="dtc w-50 tl fw2"><%= plural_table_name.titleize %></div>
+  <div class="dtc w-50 tr">
+		<%%= link_to "+", "", remote: true, class: "black-70 link dim pointer", onclick: "showModal('new_<%= singular_table_name %>_modal');" %>
+  <div>
+</h1>
+
+<% first_attribute = attributes.reject(&:password_digest?).first %>
+<% second_attribute = attributes.reject(&:password_digest?).second %>
+<table class="f6 w-100" cellspacing="0">
+  <thead>
+    <tr class="stripe-dark">
+      <th class="fw6 tl pa3 bg-white"><%= first_attribute.human_name if first_attribute.present? %></th>
+      <th class="fw6 tl pa3 bg-white"><%= second_attribute.human_name if second_attribute.present? %></th>
+      <th class="fw6 tl pa3 bg-white"></th>
+    </tr>
+  </thead>
+
+  <tbody id="list_<%= plural_table_name %>" class="lh-copy">
+    <%%= render partial: "item", collection: @<%= plural_table_name %> %>
+  </tbody>
+</table>

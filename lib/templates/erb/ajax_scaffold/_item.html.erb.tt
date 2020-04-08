@@ -1,0 +1,3 @@
+<tr id="<%= singular_table_name %>_<%%= item.id %>" class="stripe-dark">
+  <%%= render partial: "item_content", object: item %>
+</tr>

@@ -1,0 +1,32 @@
+<div class='measure center mv4'>
+  <h1 class="w-100 ph0 mh0 f2 f1-l black-70 mw8">
+    <div class="tl fw2"><%%= @<%= singular_table_name %>.<%= attributes.reject(&:password_digest?).shift.column_name %> %></div>
+  </h1>
+
+  <table class="mb4 black-70 tl f4" cellspacing="0">
+    <tbody class="lh-copy">
+<% attributes.reject(&:password_digest?).drop(1).each do |attribute| -%>
+      <tr>
+        <td class="pv2 fw5 pr3"><%= attribute.human_name %>:</td>
+        <td class="pv2 fw3">
+<% if attribute.attachment? -%>
+          <%%= link_to @<%= singular_table_name %>.<%= attribute.column_name %>.filename, @<%= singular_table_name %>.<%= attribute.column_name %> if @<%= singular_table_name %>.<%= attribute.column_name %>.attached? %>
+<% elsif attribute.attachments? -%>
+          <%% @<%= singular_table_name %>.<%= attribute.column_name %>.each do |<%= attribute.singular_name %>| %>
+            <div><%%= link_to <%= attribute.singular_name %>.filename, <%= attribute.singular_name %> %></div>
+          <%% end %>
+<% else -%>
+          <%%= @<%= singular_table_name %>.<%= attribute.column_name %> %>
+<% end -%>
+        </td>
+      </tr>
+
+<% end -%>
+    </tbody>
+  </table>
+
+  <div class="w-100">
+    <%%= link_to 'Edit', edit_<%= singular_table_name %>_path(@<%= singular_table_name %>), class: "black-70 fw3 link dim f5 f4-l" %>
+    <%%= link_to "<%= singular_table_name.pluralize.titleize %>", <%= index_helper %>_path, class: "ml4 black-70 fw3 link dim f5 f4-l" %>
+  </div>
+</div>

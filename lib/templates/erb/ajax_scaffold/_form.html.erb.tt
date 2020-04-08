@@ -1,0 +1,35 @@
+<%%= form_with(model: <%= model_resource_name %>, html: {class: 'measure mv4', id: "form_<%= singular_table_name %>_#{<%= singular_table_name %>.id || 'new'}"}) do |form| %>
+
+<% attributes.each do |attribute| -%>
+  <div class="mv3">
+<% if attribute.password_digest? -%>
+    <%%= form.password_field :password, placeholder: "Password", class: "pa2 input-reset ba b--black-70 bg-transparent w-100" %>
+    <%% if <%= singular_table_name %>.errors.messages.has_key?(:password) %>
+      <div class="red mt1"><%%= <%= singular_table_name %>.errors.messages[:password].join(", ") %></div>
+    <%% end %>
+  </div>
+
+  <div class="mv3">
+    <%%= form.password_field :password_confirmation, placeholder: "Password Confirmation", class: "pa2 input-reset ba b--black-70 bg-transparent w-100" %>
+    <%% if <%= singular_table_name %>.errors.messages.has_key?(:password_confirmation) %>
+      <div class="red mt1"><%%= <%= singular_table_name %>.errors.messages[:password_confirmation].join(", ") %></div>
+    <%% end %>
+<% elsif attribute.attachments? -%>
+    <%%= form.label :<%= attribute.column_name %> %>
+    <%%= form.<%= attribute.field_type %> :<%= attribute.column_name %>, multiple: true %>
+    <%% if <%= singular_table_name %>.errors.messages.has_key?(:<%= attribute.column_name %>) %>
+      <div class="red mt1"><%%= <%= singular_table_name %>.errors.messages[:<%= attribute.column_name %>].join(", ") %></div>
+    <%% end %>
+<% else -%>
+    <%%= form.<%= attribute.field_type %> :<%= attribute.column_name %>, placeholder: "<%= attribute.column_name.titleize %>", class: "pa2 input-reset ba b--black-70 bg-transparent w-100" %>
+    <%% if <%= singular_table_name %>.errors.messages.has_key?(:<%= attribute.column_name %>) %>
+      <div class="red mt1"><%%= <%= singular_table_name %>.errors.messages[:<%= attribute.column_name %>].join(", ") %></div>
+    <%% end %>
+<% end -%>
+  </div>
+
+<% end -%>
+  <div class="submit-field">
+    <%%= form.submit class: "ph3 pv2 input-reset ba b--black-70 black-70 bg-transparent dim pointer f4 fw3 dib" %>
+  </div>
+<%% end %>

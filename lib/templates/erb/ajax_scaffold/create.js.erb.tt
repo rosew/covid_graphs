@@ -1,0 +1,13 @@
+// This works because the pack is included on the html page where this ajax is used
+hideModal('new_<%= singular_table_name %>_modal');
+document.getElementById('new_<%= singular_table_name %>_modal').getElementsByTagName('form')[0].reset();
+
+// Create the edit modal
+var modal_list = document.getElementById("<%= singular_table_name %>_modals");
+modal_list.insertAdjacentHTML('afterbegin', "<%%= escape_javascript(render partial: "application/modal", locals: {modal_id: "<%= singular_table_name %>_#{@<%= singular_table_name %>.id}_modal", title: "Edit <%= singular_table_name.titleize %>", data: render('form', <%= singular_table_name %>: @<%= singular_table_name %>) }) %>");
+
+// This is a var and not a const because otherwise there are problems when it is called twice
+var list = document.getElementById("list_<%= plural_table_name %>");
+list.insertAdjacentHTML('afterbegin', "<%%= escape_javascript(render partial: "item", object: @<%= singular_table_name %>) %>");
+
+<%%= render partial: "layouts/update_flash", locals: { flash_name: "notice", message: "New <%= singular_table_name %> created." } %>

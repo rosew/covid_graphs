@@ -1,0 +1,16 @@
+require 'test_helper'
+
+<% module_namespacing do -%>
+class <%= class_name %>Test < ActiveSupport::TestCase
+
+  # Before every test
+  setup do
+    @<%= singular_table_name %> = <%= plural_table_name %>(:one)
+  end
+  
+  test "fixture is valid" do
+    assert @<%= singular_table_name %>.valid?
+  end
+
+end
+<% end -%>

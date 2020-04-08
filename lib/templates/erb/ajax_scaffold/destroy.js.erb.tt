@@ -1,0 +1,5 @@
+// This is a var and not a const because otherwise there are problems when it is called twice
+var row = document.getElementById("<%= singular_table_name %>_<%%= @<%= singular_table_name %>.id %>");
+row.parentNode.removeChild(row);
+
+<%%= render partial: "layouts/update_flash", locals: { flash_name: "notice", message: "<%= singular_table_name.titleize %> was removed." } %>
